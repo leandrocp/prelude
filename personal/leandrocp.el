@@ -27,6 +27,16 @@
 (prelude-require-package 'base16-theme)
 (load-theme 'base16-eighties-dark t)
 
+;; window
+(prelude-require-packages '(windmove switch-window))
+(global-set-key (kbd "C-x -") 'split-window-below)
+(global-set-key (kbd "C-x \\") 'split-window-right)
+(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "C-x h") 'windmove-left)
+(global-set-key (kbd "C-x l") 'windmove-right)
+(global-set-key (kbd "C-x j") 'windmove-down)
+(global-set-key (kbd "C-x k") 'windmove-up)
+
 ;; tabbar
 (prelude-require-package 'tabbar)
 (setq tabbar-background-color nil)
