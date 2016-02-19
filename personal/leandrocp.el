@@ -4,7 +4,6 @@
 
 ;; company
 (setq company-show-numbers t)
-;; (define-key company-active-map [tab] 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "C-j") 'company-select-next)
 (define-key company-active-map (kbd "C-k") 'company-select-previous)
@@ -78,6 +77,10 @@
 ; (global-git-gutter-mode t)
 ; (git-gutter:linum-setup)
 
+;; commenter
+(prelude-require-package 'evil-nerd-commenter)
+(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+
 ;; elixir
 (defun t-elixir-mode-hook ()
   (yas/minor-mode +1)
@@ -125,8 +128,8 @@
                             "*alchemist help*"
                             "*alchemist elixir*"
                             "*alchemist elixirc*"))
-                    (display-buffer-reuse-window
-                     display-buffer-in-side-window)
+               (display-buffer-reuse-window
+                display-buffer-in-side-window)
                (reusable-frames . visible)
                (side            . right)
                (window-width   . 0.5)))
