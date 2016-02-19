@@ -74,9 +74,9 @@
 (prelude-require-package 'evil-magit)
 
 ;; git-gutter
-(prelude-require-package 'git-gutter)
-(global-git-gutter-mode t)
-(git-gutter:linum-setup)
+; (prelude-require-package 'git-gutter)
+; (global-git-gutter-mode t)
+; (git-gutter:linum-setup)
 
 ;; elixir
 (defun t-elixir-mode-hook ()
