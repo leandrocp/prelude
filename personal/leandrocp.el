@@ -125,6 +125,10 @@
 (prelude-require-package 'evil-nerd-commenter)
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
 
+;; expand-region
+(prelude-require-package 'expand-region)
+(global-set-key (kbd "M-e") 'er/expand-region)
+
 ;; elixir
 (defun t-elixir-mode-hook ()
   (yas/minor-mode +1)
