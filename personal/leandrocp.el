@@ -93,13 +93,13 @@
 (prelude-require-package 'evil-magit)
 
 ;; git-gutter
-(prelude-require-package 'diff-hl)
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-(add-hook 'prog-mode-hook 'diff-hl-mode)
-(add-hook 'html-mode-hook 'diff-hl-mode)
-(add-hook 'text-mode-hook 'diff-hl-mode)
-(add-hook 'diff-hl-mode-hook 'diff-hl-margin-mode)
-(add-hook 'diff-hl-mode-hook 'diff-hl-flydiff-mode)
+; (prelude-require-package 'diff-hl)
+; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+; (add-hook 'prog-mode-hook 'diff-hl-mode)
+; (add-hook 'html-mode-hook 'diff-hl-mode)
+; (add-hook 'text-mode-hook 'diff-hl-mode)
+; (add-hook 'diff-hl-mode-hook 'diff-hl-margin-mode)
+; (add-hook 'diff-hl-mode-hook 'diff-hl-flydiff-mode)
 
 ;; commenter
 (prelude-require-package 'evil-nerd-commenter)
@@ -157,3 +157,5 @@
                (reusable-frames . visible)
                (side            . right)
                (window-width   . 0.5)))
+
+(prelude-require-package 'haml-mode)
