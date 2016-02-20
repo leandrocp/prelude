@@ -6,7 +6,7 @@
 (setq user-full-name "Leandro Cesquini Pereira"
       user-mail-address "leandro.cesquini@gmail.com")
 
-;; company
+;; company & snippets
 (prelude-require-packages '(yasnippet elixir-yasnippets ember-yasnippets angular-snippets))
 (yas-global-mode 1)
 (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
@@ -39,6 +39,12 @@
 (setq scroll-margin 5
       scroll-conservatively 9999
       scroll-step 1)
+
+(require 'saveplace)
+(setq-default save-place t)
+(if (fboundp #'save-place-mode)
+  (save-place-mode +1)
+  (setq-default save-place t))
 
 (require 'whitespace)
 (setq whitespace-style '(face lines-tail))
