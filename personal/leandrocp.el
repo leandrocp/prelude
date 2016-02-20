@@ -2,6 +2,10 @@
 (setq shell-file-name "/bin/zsh")
 (setq explicit-shell-file-name "/bin/zsh")
 
+;; me
+(setq user-full-name "Leandro Cesquini Pereira"
+      user-mail-address "leandro.cesquini@gmail.com")
+
 ;; company
 (prelude-require-packages '(yasnippet elixir-yasnippets))
 (yas-global-mode 1)
@@ -32,6 +36,22 @@
    conf-mode-hook
    css-mode-hook))
 (setq default-cursor-type 'box)
+
+(require 'whitespace)
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
+(defun set-my-margins ()
+  (interactive)
+  (setq left-margin-width 1)
+  (setq left-fringe-width 5)
+  (setq right-fringe-width 10))
+(add-hook 'text-mode-hook 'set-my-margins)
+(add-hook 'prog-mode-hook 'set-my-margins)
+
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file "~/.emacs.d/saved-places")
 
 ;; theme
 (prelude-require-package 'base16-theme)
