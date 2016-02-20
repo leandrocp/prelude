@@ -7,7 +7,7 @@
       user-mail-address "leandro.cesquini@gmail.com")
 
 ;; company
-(prelude-require-packages '(yasnippet elixir-yasnippets))
+(prelude-require-packages '(yasnippet elixir-yasnippets ember-yasnippets angular-snippets))
 (yas-global-mode 1)
 (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
 (defun company-mode/backend-with-yas (backend)
@@ -36,6 +36,9 @@
    conf-mode-hook
    css-mode-hook))
 (setq default-cursor-type 'box)
+(setq scroll-margin 5
+      scroll-conservatively 9999
+      scroll-step 1)
 
 (require 'whitespace)
 (setq whitespace-style '(face lines-tail))
@@ -48,10 +51,6 @@
   (setq right-fringe-width 10))
 (add-hook 'text-mode-hook 'set-my-margins)
 (add-hook 'prog-mode-hook 'set-my-margins)
-
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file "~/.emacs.d/saved-places")
 
 ;; theme
 (prelude-require-package 'base16-theme)
@@ -129,6 +128,12 @@
 (prelude-require-package 'expand-region)
 (global-set-key (kbd "M-e") 'er/expand-region)
 
+;; drag-stuff
+(prelude-require-package 'drag-stuff)
+(add-hook 'prog-mode-hook (lambda () (drag-stuff-mode t)))
+(global-set-key (kbd "M-k") 'drag-stuff-up)
+(global-set-key (kbd "M-j") 'drag-stuff-down)
+
 ;; elixir
 (defun t-elixir-mode-hook ()
   (yas/minor-mode +1)
@@ -183,3 +188,9 @@
                (window-width   . 0.5)))
 
 (prelude-require-package 'haml-mode)
+
+(prelude-require-package 'ember-mode)
+(add-hook 'js-mode-hook (lambda () (ember-mode t)))
+(add-hook 'web-mode-hook (lambda () (ember-mode t)))
+
+(prelude-require-package 'angular-mode)
