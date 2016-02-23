@@ -22,6 +22,14 @@
 (define-key company-active-map (kbd "C-j") 'company-select-next)
 (define-key company-active-map (kbd "C-k") 'company-select-previous)
 
+;; projectile
+(add-to-list 'projectile-globally-ignored-directories "node_modules")
+(add-to-list 'projectile-globally-ignored-directories "bower_components")
+(add-to-list 'projectile-globally-ignored-directories "tmp")
+(add-to-list 'projectile-globally-ignored-directories "dist")
+(add-to-list 'projectile-globally-ignored-directories "build")
+(add-to-list 'projectile-globally-ignored-directories ".git")
+
 ;; display
 (menu-bar-mode -1)
 (line-number-mode 1)
