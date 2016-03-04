@@ -6,6 +6,10 @@
 (setq user-full-name "Leandro Cesquini Pereira"
       user-mail-address "leandro.cesquini@gmail.com")
 
+;; copy & paste
+(prelude-require-package 'pbcopy)
+(turn-on-pbcopy)
+
 ;; company & snippets
 (prelude-require-packages '(yasnippet elixir-yasnippets ember-yasnippets angular-snippets))
 (yas-global-mode 1)
@@ -35,6 +39,7 @@
 (line-number-mode 1)
 (column-number-mode 1)
 (global-hl-line-mode t)
+(set-default 'truncate-lines t)
 (setq linum-format " %3d ")
 (mapc
  (lambda (mode-hook)
@@ -55,6 +60,7 @@
   (setq-default save-place t))
 
 (require 'whitespace)
+(setq whitespace-line-column 120)
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
@@ -148,12 +154,30 @@
 (global-set-key (kbd "M-k") 'drag-stuff-up)
 (global-set-key (kbd "M-j") 'drag-stuff-down)
 
+;; beautify code
+(prelude-require-package 'web-beautify)
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'js
+  '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'json-mode
+  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
+;; dash
+(prelude-require-package 'dash-at-point)
+(global-set-key (kbd "M-d") 'dash-at-point)
+
+;; web
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(setq web-mode-enable-current-element-highlight t)
+(setq web-mode-enable-current-column-highlight t)
+
 ;; elixir
-(defun t-elixir-mode-hook ()
-  (yas/minor-mode +1)
-  (smartparens-mode +1)
-  (tester-init-test-run #'alchemist-mix-test-file "_test.exs$")
-  (tester-init-test-suite-run #'alchemist-mix-test))
+(prelude-require-package 'alchemist)
+(setq alchemist-goto-elixir-source-dir "~/code/github/elixir/elixir")
 
 (defun my-elixir-do-end-close-action (id action context)
   (when (eq action 'insert)
@@ -173,22 +197,6 @@
                  :post-handlers '(:add my-elixir-do-end-close-action)
                  :actions '(insert)))
 
-(defun t-erlang-mode-hook ()
-  (define-key erlang-mode-map (kbd "M-,") 'alchemist-goto-jump-back))
-
-(defun t-alchemist-custom-keybindings ()
-  (define-key alchemist-mode-map (kbd "M-w") 'alchemist-goto-list-symbol-definitions))
-
-(defun alchemist-my-iex-keys ()
-  (define-key alchemist-iex-mode-map (kbd "C-d") 'windmove-right))
-
-(add-hook 'alchemist-iex-mode-hook 'alchemist-my-iex-keys)
-(add-hook 'alchemist-mode-hook 't-alchemist-custom-keybindings)
-(add-hook 'elixir-mode-hook  't-elixir-mode-hook)
-(add-hook 'erlang-mode-hook 't-erlang-mode-hook)
-
-;; Display alchemist buffers always at the bottom
-;; Source: http://www.lunaryorn.com/2015/04/29/the-power-of-display-buffer-alist.html
 (add-to-list 'display-buffer-alist
              `(,(rx bos (or "*alchemist test report*"
                             "*alchemist mix*"
@@ -201,10 +209,27 @@
                (side            . right)
                (window-width   . 0.5)))
 
+(defun t-alchemist-custom-keybindings ()
+  (define-key alchemist-mode-map (kbd "M-]") 'alchemist-goto-definition-at-point)
+  (define-key alchemist-mode-map (kbd "M-[") 'alchemist-goto-jump-back)
+  (define-key alchemist-mode-map (kbd "M-/") 'alchemist-goto-list-symbol-definitions))
+
+(add-hook 'elixir-mode-hook (lambda () (alchemist-mode)))
+(add-hook 'alchemist-mode-hook 't-alchemist-custom-keybindings)
+
+; Web
 (prelude-require-package 'haml-mode)
-
-(prelude-require-package 'ember-mode)
-(add-hook 'js-mode-hook (lambda () (ember-mode t)))
-(add-hook 'web-mode-hook (lambda () (ember-mode t)))
-
+(prelude-require-packages '(ember-mode handlebars-mode))
+(add-hook 'js-mode-hook (lambda () (ember-mode)))
+(add-hook 'web-mode-hook (lambda () (ember-mode)))
 (prelude-require-package 'angular-mode)
+
+;; modeline
+(diminish 'company-mode)
+(diminish 'helm-mode)
+(diminish 'guru-mode)
+(diminish 'drag-stuff-mode)
+(diminish 'yas-global-mode)
+(diminish 'yas-minor-mode)
+(diminish 'whitespace-mode)
+(diminish 'smartparens-mode)
