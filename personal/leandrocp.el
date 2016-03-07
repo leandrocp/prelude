@@ -86,6 +86,10 @@
 (global-set-key (kbd "C-x j") 'windmove-down)
 (global-set-key (kbd "C-x k") 'windmove-up)
 
+;; buffer
+(global-set-key (kbd "M-q") 'kill-this-buffer)
+(global-set-key (kbd "M-l") 'prelude-switch-to-previous-buffer)
+
 ;; tabbar
 (prelude-require-package 'tabbar)
 (setq tabbar-background-color nil)
