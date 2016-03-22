@@ -90,6 +90,10 @@
 (global-set-key (kbd "M-q") 'kill-this-buffer)
 (global-set-key (kbd "M-l") 'prelude-switch-to-previous-buffer)
 
+;; imenu
+(global-set-key (kbd "M-b") 'helm-imenu-anywhere)
+(global-set-key (kbd "M-r") 'helm-resume)
+
 ;; tabbar
 (prelude-require-package 'tabbar)
 (setq tabbar-background-color nil)
@@ -237,3 +241,14 @@
 (diminish 'yas-minor-mode)
 (diminish 'whitespace-mode)
 (diminish 'smartparens-mode)
+
+;; indent
+(add-hook 'prog-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+(prelude-require-package 'aggressive-indent)
+(global-aggressive-indent-mode 1)
+(add-to-list
+ 'aggressive-indent-dont-indent-if
+ '(and (derived-mode-p 'elixir-mode)
+       (string-match "\\b\\#\\b"
+		     (thing-at-point 'line))))
