@@ -136,6 +136,9 @@
 (setq neo-window-position 'right)
 (setq neo-window-width 40)
 
+;; which-key
+(which-key-setup-side-window-right)
+
 ;; magit
 (prelude-require-package 'evil-magit)
 
