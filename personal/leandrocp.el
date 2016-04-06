@@ -1,10 +1,14 @@
+;;; leandrocp.el --- custom emacs config
+;;; Commentary:
+;;; Code:
+
 ;; shell
-(setq shell-file-name "/bin/zsh")
-(setq explicit-shell-file-name "/bin/zsh")
+(setq shell-file-name "/bin/zsh"
+  explicit-shell-file-name "/bin/zsh")
 
 ;; me
 (setq user-full-name "Leandro Cesquini Pereira"
-      user-mail-address "leandro.cesquini@gmail.com")
+  user-mail-address "leandro.cesquini@gmail.com")
 
 ;; copy & paste
 (prelude-require-package 'pbcopy)
@@ -142,14 +146,9 @@
 ;; magit
 (prelude-require-package 'evil-magit)
 
-;; git-gutter
-; (prelude-require-package 'diff-hl)
-; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-; (add-hook 'prog-mode-hook 'diff-hl-mode)
-; (add-hook 'html-mode-hook 'diff-hl-mode)
-; (add-hook 'text-mode-hook 'diff-hl-mode)
-; (add-hook 'diff-hl-mode-hook 'diff-hl-margin-mode)
-; (add-hook 'diff-hl-mode-hook 'diff-hl-flydiff-mode)
+;; editorconfig
+(prelude-require-package 'editorconfig)
+(editorconfig-mode 1)
 
 ;; commenter
 (prelude-require-package 'evil-nerd-commenter)
